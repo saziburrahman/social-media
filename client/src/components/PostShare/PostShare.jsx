@@ -1,35 +1,67 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import ProfileImage from "../../img/profileImg.jpg";
 import "./PostShare.css";
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilPlayCircle } from "@iconscout/react-unicons";
 import { UilSchedule } from "@iconscout/react-unicons";
 import { UilLocationPoint } from "@iconscout/react-unicons";
+import { UilTimes } from "@iconscout/react-unicons";
 
 const PostShare = () => {
+  const [image, setImage] = useState(null);
+  const imgRef = useRef();
+
+  const onImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      let img = e.target.files[0];
+      setImage({
+        image: URL.createObjectURL(img),
+      });
+    }
+  };
+
   return (
     <div className="PostShare">
       <img src={ProfileImage} alt="" />
       <div>
         <input type="text" name="" id="" placeholder="What's heppening" />
-      </div>
-      <div className="postOptions">
-        <div className="option">
-          <UilScenery />
-          Photo
+        <div className="postOptions">
+          <div
+            className="option"
+            style={{ color: "var(--photo)" }}
+            onClick={() => imgRef.current.click()}
+          >
+            <UilScenery />
+            Photo
+          </div>
+          <div className="option" style={{ color: "var(--video)" }}>
+            <UilPlayCircle />
+            Video
+          </div>
+          <div className="option" style={{ color: "var(--location)" }}>
+            <UilLocationPoint />
+            Location
+          </div>
+          <div className="option" style={{ color: "var(--shedule)" }}>
+            <UilSchedule />
+            Schedule
+          </div>
+          <button className="button ps-button">Share</button>
+          <div style={{ display: "none" }}>
+            <input
+              type="file"
+              name="myImage"
+              id=""
+              ref={imgRef}
+              onChange={onImageChange}
+            />
+          </div>
         </div>
-        <div className="option">
-          <UilPlayCircle />
-          Video
-        </div>
-        <div className="option">
-          <UilLocationPoint />
-          Location
-        </div>
-        <div className="option">
-          <UilSchedule />
-          Schedule
-        </div>
+        {image && 
+        <div className="previewImage">
+          <UilTimes onClick={()=>setImage(null)}/>
+          <img src={image.image} alt="" />
+        </div>}
       </div>
     </div>
   );
