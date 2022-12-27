@@ -2,8 +2,11 @@ import React from "react";
 import "./Auth.css";
 import Logo from "../../img/logo.png";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logIn, signUp } from "../../actions/AuthAction";
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(true);
+  // const dispatch = useDispatch();
   const [data, setdata] = useState({
     firstname: "",
     lastname: "",
@@ -18,12 +21,11 @@ const Auth = () => {
     e.preventDefault();
 
     if (isSignUp) {
-      if (data.password !== data.confirmpass) {
-        setConfirmPass(false);
-      }
-      else{
-        setConfirmPass(true)
-      }
+      // data.password === data.confirmpass
+      //   ? dispatch(signUp(data))
+      //   : setConfirmPass(false);
+    } else {
+      // dispatch(logIn(data));
     }
   };
 
@@ -76,7 +78,6 @@ const Auth = () => {
                 placeholder="Last Name"
                 onChange={handleChange}
                 value={data.lastname}
-
               />
             </div>
           )}
@@ -89,7 +90,6 @@ const Auth = () => {
               placeholder="Username"
               onChange={handleChange}
               value={data.username}
-
             />
           </div>
           <div>
@@ -101,7 +101,6 @@ const Auth = () => {
               className="infoInput"
               onChange={handleChange}
               value={data.password}
-
             />
             {isSignUp && (
               <input
@@ -112,7 +111,6 @@ const Auth = () => {
                 className="infoInput"
                 onChange={handleChange}
                 value={data.confirmpass}
-
               />
             )}
           </div>
@@ -130,7 +128,10 @@ const Auth = () => {
           <div>
             <span
               style={{ fontSize: "12px", cursor: "pointer" }}
-              onClick={() => {setIsSignUp((prev) => !prev);resetForm()}}
+              onClick={() => {
+                setIsSignUp((prev) => !prev);
+                resetForm();
+              }}
             >
               {isSignUp
                 ? "Already have an account? Login!"
