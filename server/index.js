@@ -3,15 +3,16 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import AuthRoute from "./Routes/AuthRoute.js";
-import UserRoute from "./Routes/UserRoute.js"
-import PostRoute from "./Routes/PostRoute.js"
+import UserRoute from "./Routes/UserRoute.js";
+import PostRoute from "./Routes/PostRoute.js";
+import cors from 'cors'
 
 const app = express();
 
 // Middlewares
 app.use(bodyParser.json({ extented: true, limit: "30mb" }));
 app.use(bodyParser.urlencoded({ extented: true, limit: "30mb" }));
-
+app.use(cors())
 dotenv.config();
 
 //Mongo DB connection
@@ -26,4 +27,4 @@ mongoose
 //   Route Use
 app.use("/auth", AuthRoute);
 app.use("/user", UserRoute);
-app.use("/post",PostRoute)
+app.use("/post", PostRoute);
