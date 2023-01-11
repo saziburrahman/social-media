@@ -25,9 +25,6 @@ function App() {
           element={user ? <Navigate to="../home" /> : <Auth />}
         />
       </Routes>
-      {/* <Home/> */}
-      {/* <Profile /> */}
-      {/* <Auth /> */}
     </div>
   );
 }
