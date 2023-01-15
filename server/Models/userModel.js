@@ -23,6 +23,7 @@ const UserShecma = mongoose.Schema(
       default: false,
     },
     profilePicture: String,
+    country:String,
     coverPicture: String,
     about: String,
     livesin: String,
