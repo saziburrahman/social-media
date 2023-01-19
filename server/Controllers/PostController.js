@@ -5,9 +5,7 @@ import UserModel from "../Models/userModel.js";
 // Create new Post
 export const createPost = async (req, res) => {
   const newPost = new PostModel(req.body);
-  console.log("Indie Create Post");
   try {
-    console.log(newPost);
     await newPost.save();
     res.status(200).json(newPost);
   } catch (error) {
